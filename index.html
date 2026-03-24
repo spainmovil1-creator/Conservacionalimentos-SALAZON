@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Conservación Tradicional — Vol. II: Salazón y Curado</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sea:        #0d2f4a;
+    --sea-mid:    #1a4a6e;
+    --sea-light:  #2c6fa0;
+    --seafoam:    #5a90c0;
+    --salt:       #e8f2fa;
+    --salt-mid:   #d0e5f5;
+    --salt-dark:  #b0cce0;
+    --parchment:  #f4f0e8;
+    --ink:        #0d1f2d;
+    --ink-light:  #2a3d50;
+    --gold:       #b07d1a;
+    --gold-light: #d4a030;
+    --warn-bg:    #fff8e1;
+    --warn-bdr:   #c8960c;
+    --warn-txt:   #5c3a00;
+    --info-bg:    #e6f3fb;
+    --info-bdr:   #2c6fa0;
+    --info-txt:   #0d2f4a;
+    --shadow:     rgba(13,31,45,0.18);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #061520;
+    background-image:
+      radial-gradient(ellipse at 30% 0%, #0d2f4a 0%, #040e17 100%);
+    font-family: 'EB Garamond', Georgia, serif;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  /* ── NAV ── */
+  .nav-toc {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    width: 224px;
+    background: #040e17;
+    border-right: 2px solid var(--sea-mid);
+    padding: 2rem 1rem;
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .nav-toc h3 {
+    font-family: 'Cinzel', serif;
+    color: var(--gold-light);
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--sea-mid);
+  }
+  .nav-toc a {
+    color: var(--salt-mid);
+    text-decoration: none;
+    font-size: 0.77rem;
+    font-family: 'EB Garamond', serif;
+    line-height: 1.6;
+    padding: 0.18rem 0.4rem;
+    border-radius: 2px;
+    display: block;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-toc a:hover, .nav-toc a.active {
+    color: var(--gold-light);
+    background: rgba(90,144,192,0.12);
+  }
+  .nav-toc a.sub {
+    padding-left: 1.1rem;
+    font-size: 0.71rem;
+    color: #6a90b0;
+  }
+  .nav-toc a.sub:hover, .nav-toc a.sub.active { color: var(--gold-light); }
+
+  /* ── PAGE WRAP ── */
+  .page-wrap {
+    max-width: 840px;
+    margin: 0 auto 0 260px;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: var(--salt);
+    background-image:
+      linear-gradient(160deg, #dceefa 0%, #e8f2fa 40%, #cce0f0 100%);
+    border-radius: 4px;
+    padding: 5rem 4rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 48px var(--shadow), inset 0 0 80px rgba(44,111,160,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 18px;
+    border: 1.5px solid var(--sea-mid);
+    border-radius: 2px;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    inset: 26px;
+    border: 0.5px solid var(--seafoam);
+    border-radius: 1px;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+  .cover-vol  { font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.28em; color:var(--sea-mid); text-transform:uppercase; margin-bottom:1.4rem; }
+  .cover h1   { font-family:'Cinzel',serif; font-size:2.3rem; font-weight:900; color:var(--sea); line-height:1.15; margin-bottom:0.4rem; text-shadow:1px 2px 0 rgba(13,47,74,0.12); }
+  .cover-sub  { font-family:'Playfair Display',serif; font-size:1rem; color:var(--sea-mid); font-style:italic; margin:1rem 0 1.8rem; opacity:0.88; }
+  .cover-div  { width:140px; height:2px; background:linear-gradient(90deg,transparent,var(--seafoam),transparent); margin:1.4rem auto; }
+  .cover-vol2 { font-family:'Cinzel',serif; font-size:1.45rem; font-weight:700; color:var(--sea-mid); margin-bottom:0.35rem; }
+  .cover-tech { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--sea-light); margin-bottom:1.8rem; }
+  .cover-era  { font-family:'EB Garamond',serif; font-size:0.9rem; color:#5a80a0; font-style:italic; }
+  .cover-orn  { font-size:2.2rem; color:var(--seafoam); opacity:0.45; margin:0.8rem 0; line-height:1; }
+
+  /* ── SECTIONS ── */
+  .section {
+    background: var(--parchment);
+    background-image: radial-gradient(ellipse at 85% 100%, #dceefa 0%, #f4f0e8 65%);
+    border-radius: 4px;
+    padding: 2.5rem 3rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 24px var(--shadow);
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .section.visible { opacity:1; transform:translateY(0); }
+
+  /* ── HEADINGS ── */
+  h1.sec-h1 {
+    font-family:'Cinzel',serif; font-size:1.48rem; font-weight:700;
+    color:var(--sea); margin-bottom:1.1rem; padding-bottom:0.55rem;
+    border-bottom:2px solid var(--salt-dark); position:relative;
+  }
+  h1.sec-h1::after { content:''; position:absolute; bottom:-2px; left:0; width:60px; height:2px; background:var(--seafoam); }
+  h2.sec-h2 { font-family:'Playfair Display',serif; font-size:1.18rem; font-weight:700; color:var(--sea-mid); margin:2rem 0 0.7rem; font-style:italic; }
+  h3.sec-h3 { font-family:'EB Garamond',serif; font-size:0.97rem; font-weight:600; color:var(--ink-light); margin:1.4rem 0 0.5rem; text-transform:uppercase; letter-spacing:0.08em; }
+
+  p { font-size:1.01rem; line-height:1.84; color:var(--ink); margin-bottom:0.85rem; text-align:justify; hyphens:auto; }
+
+  /* ── LISTS ── */
+  ul.ml, ol.ml { margin:0.4rem 0 0.9rem; padding-left:0; list-style:none; }
+  ul.ml li { padding:0.32rem 0 0.32rem 1.7rem; position:relative; font-size:1rem; line-height:1.75; color:var(--ink); }
+  ul.ml li::before { content:'⚓'; position:absolute; left:0; color:var(--seafoam); font-size:0.78rem; top:0.5rem; }
+  ol.ml { counter-reset:step; }
+  ol.ml li { padding:0.48rem 0 0.48rem 2.5rem; position:relative; font-size:1rem; line-height:1.75; color:var(--ink); counter-increment:step; border-bottom:1px dotted var(--salt-dark); }
+  ol.ml li:last-child { border-bottom:none; }
+  ol.ml li::before {
+    content:counter(step); position:absolute; left:0; top:0.45rem;
+    width:1.65rem; height:1.65rem; background:var(--sea-mid); color:#fff;
+    font-family:'Cinzel',serif; font-size:0.7rem; font-weight:700;
+    display:flex; align-items:center; justify-content:center; border-radius:50%;
+  }
+  li strong { color:var(--sea); }
+
+  /* ── CALLOUTS ── */
+  .box-warn {
+    background:var(--warn-bg); border-left:4px solid var(--warn-bdr);
+    padding:0.95rem 1.15rem; border-radius:0 4px 4px 0; margin:1.1rem 0;
+    font-size:0.94rem; line-height:1.72; color:var(--warn-txt); font-family:'EB Garamond',serif;
+  }
+  .box-warn::before { content:'⚠ '; font-size:0.97rem; color:var(--warn-bdr); }
+  .box-info {
+    background:var(--info-bg); border-left:4px solid var(--info-bdr);
+    padding:0.95rem 1.15rem; border-radius:0 4px 4px 0; margin:1.1rem 0;
+    font-size:0.94rem; line-height:1.72; color:var(--info-txt); font-family:'EB Garamond',serif;
+  }
+  .box-info::before { content:'🧂 '; font-size:0.97rem; }
+
+  /* ── DURATION TAG ── */
+  .dur { display:inline-block; background:var(--sea-mid); color:#fff; font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.1em; padding:0.18rem 0.7rem; border-radius:2px; margin:0.25rem 0 0.55rem; }
+
+  /* ── TABLES ── */
+  .tbl-wrap { overflow-x:auto; margin:0.9rem 0; }
+  table.mt { width:100%; border-collapse:collapse; font-size:0.88rem; font-family:'EB Garamond',serif; }
+  table.mt thead tr { background:var(--sea-mid); color:#fff; }
+  table.mt thead th { padding:0.65rem 0.85rem; font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.1em; text-align:left; font-weight:700; }
+  table.mt tbody tr:nth-child(odd)  { background:var(--salt); }
+  table.mt tbody tr:nth-child(even) { background:#fff; }
+  table.mt tbody tr:hover { background:#cce4f7; transition:background 0.15s; }
+  table.mt td { padding:0.55rem 0.85rem; border-bottom:1px solid var(--salt-dark); line-height:1.5; vertical-align:top; }
+  table.mt td:first-child { font-weight:600; color:var(--sea); }
+
+  /* ── FOOD HEADER ── */
+  .food-hdr { display:flex; align-items:baseline; gap:0.9rem; flex-wrap:wrap; margin-bottom:0.5rem; }
+  .food-icon { font-size:1.8rem; line-height:1; flex-shrink:0; }
+
+  /* ── DIVIDER ── */
+  .div { border:none; border-top:2px solid var(--salt-dark); margin:2rem 0; position:relative; }
+  .div::after { content:'✦ ✦ ✦'; position:absolute; left:50%; top:-0.65rem; transform:translateX(-50%); background:var(--parchment); padding:0 0.8rem; color:var(--seafoam); font-size:0.75rem; letter-spacing:0.5rem; }
+
+  /* ── CONCENTRATION TABLE ── */
+  .conc-table { width:100%; border-collapse:collapse; font-size:0.88rem; font-family:'EB Garamond',serif; margin:0.9rem 0; }
+  .conc-table thead tr { background:var(--sea-mid); color:#fff; }
+  .conc-table thead th { padding:0.6rem 0.8rem; font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.1em; text-align:left; }
+  .conc-table tbody tr:nth-child(odd)  { background:var(--salt); }
+  .conc-table tbody tr:nth-child(even) { background:#fff; }
+  .conc-table td { padding:0.55rem 0.8rem; border-bottom:1px solid var(--salt-dark); vertical-align:top; line-height:1.5; }
+  .conc-table td:first-child { font-weight:700; color:var(--sea-mid); font-family:'Cinzel',serif; font-size:0.82rem; }
+
+  @media (max-width:900px) {
+    .nav-toc { display:none; }
+    .page-wrap { margin-left:0; max-width:100%; }
+    .cover { padding:3rem 1.5rem; }
+    .section { padding:1.8rem 1.4rem; }
+    .cover h1 { font-size:1.65rem; }
+  }
+  @media print {
+    body { background:#fff; padding:0; }
+    .nav-toc { display:none; }
+    .page-wrap { margin:0 auto; max-width:800px; }
+    .section { box-shadow:none; border:1px solid #ccc; opacity:1; transform:none; }
+    .cover { box-shadow:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav class="nav-toc" id="toc">
+  <h3>Índice — Vol. II</h3>
+  <a href="#cover">Portada</a>
+  <a href="#s1">1. Introducción</a>
+  <a href="#s2">2. Principios microbiológicos</a>
+  <a href="#s2a" class="sub">2.1 Cómo actúa la sal</a>
+  <a href="#s2b" class="sub">2.2 Concentraciones</a>
+  <a href="#s2c" class="sub">2.3 Nitratos naturales</a>
+  <a href="#s3">3. Sal, elementos y recipientes</a>
+  <a href="#s3a" class="sub">3.1 Tipos de sal</a>
+  <a href="#s3b" class="sub">3.2 Herramientas</a>
+  <a href="#s3c" class="sub">3.3 Recintos de curado</a>
+  <a href="#s4">4. Alimentos — procesos</a>
+  <a href="#s4a" class="sub">4.1 Jamón curado</a>
+  <a href="#s4b" class="sub">4.2 Tocino y panceta</a>
+  <a href="#s4c" class="sub">4.3 Bacalao en sal</a>
+  <a href="#s4d" class="sub">4.4 Anchoas en salazón</a>
+  <a href="#s4e" class="sub">4.5 Aceitunas en salmuera</a>
+  <a href="#s4f" class="sub">4.6 Cecina</a>
+  <a href="#s4g" class="sub">4.7 Mantequilla en turbera</a>
+  <a href="#s5">5. Tabla comparativa</a>
+  <a href="#s6">6. Preparación de salmueras</a>
+  <a href="#s7">7. Seguridad alimentaria</a>
+  <a href="#s8">8. Conclusión</a>
+</nav>
+
+<div class="page-wrap">
+
+<!-- ══ COVER ══ -->
+<div class="cover" id="cover">
+  <div class="cover-vol">Manual de Conservación Tradicional de Alimentos</div>
+  <h1>Salazón<br>y Curado</h1>
+  <div class="cover-div"></div>
+  <div class="cover-orn">⚓ ✦ ⚓</div>
+  <div class="cover-vol2">Volumen II</div>
+  <div class="cover-tech">Técnica de la SALAZÓN Y EL CURADO</div>
+  <div class="cover-sub">Siglos XVIII y anteriores — Sal, nitratos, salmueras<br>y curado tradicional de carnes, pescados y verduras</div>
+  <div class="cover-div"></div>
+  <div class="cover-era">Basado en fuentes históricas, etnográficas y principios microbiológicos</div>
+</div>
+
+<!-- ══ S1: INTRO ══ -->
+<section class="section" id="s1">
+  <h1 class="sec-h1">1. Introducción</h1>
+  <p>La salazón es, junto con el secado, la técnica de conservación de alimentos más antigua y extendida de la humanidad. Mientras que el secado elimina el agua mediante evaporación, la salazón la extrae mediante ósmosis: la sal, en contacto con la superficie del alimento, atrae el agua de las células hacia el exterior, reduciendo la actividad de agua (<em>aw</em>) hasta niveles que inhiben el crecimiento microbiano.</p>
+  <p>Su historia es inseparable de la historia del comercio. La sal fue durante milenios uno de los productos más valiosos del mundo —tan valiosa que los soldados romanos recibían parte de su paga en sal (de ahí la palabra <strong>«salario»</strong>). Las rutas de la sal cruzaban continentes, y las ciudades que controlaban las salinas controlaban el poder económico de su región.</p>
+  <p>El curado es una variante de la salazón que combina la sal con otros agentes conservadores: nitratos naturales presentes en ciertas sales, azúcar, especias y tiempo de maduración. El curado no solo conserva: transforma la textura y el sabor del alimento, creando productos como el jamón ibérico, la cecina, el <em>prosciutto</em> o las anchoas en salazón, que son incomparables en sabor respecto al alimento fresco original.</p>
+  <div class="box-info">Distinción clave: La salazón simple <strong>preserva</strong> el alimento impidiendo su descomposición. El curado va más allá: utiliza la sal combinada con tiempo, temperatura y otros factores para <strong>transformar bioquímicamente</strong> el alimento, desarrollando sabores, colores y texturas propios que no existían en el producto fresco.</div>
+</section>
+
+<!-- ══ S2: PRINCIPIOS ══ -->
+<section class="section" id="s2">
+  <h1 class="sec-h1">2. Principios microbiológicos y químicos</h1>
+
+  <h2 class="sec-h2" id="s2a">2.1 Cómo actúa la sal sobre los microorganismos</h2>
+  <p>La sal (cloruro sódico, NaCl) actúa sobre los microorganismos por tres mecanismos simultáneos:</p>
+  <ul class="ml">
+    <li><strong>Reducción de la actividad de agua (aw):</strong> La sal se une a las moléculas de agua libres del alimento, dejándolas no disponibles para los microorganismos. Por encima del 10% de sal en peso, la mayoría de las bacterias patógenas quedan inhibidas. Por encima del 20%, solo sobreviven bacterias halófilas (amantes de la sal) generalmente inofensivas.</li>
+    <li><strong>Efecto osmótico sobre las células bacterianas:</strong> La sal crea un entorno hipertónico exterior. Las células bacterianas pierden agua por ósmosis hacia ese entorno concentrado, lo que inhibe su metabolismo y reproducción.</li>
+    <li><strong>Inhibición de enzimas:</strong> Los iones de cloro y sodio interfieren con ciertas enzimas bacterianas responsables de la putrefacción. Este efecto es independiente de la reducción de humedad.</li>
+  </ul>
+
+  <h2 class="sec-h2" id="s2b">2.2 Concentraciones de sal y sus efectos</h2>
+  <p>No todas las concentraciones de sal tienen el mismo efecto. La siguiente tabla resume los rangos históricos y su impacto microbiológico:</p>
+  <div class="tbl-wrap">
+    <table class="conc-table">
+      <thead><tr><th>Concentración</th><th>Denominación</th><th>Efecto microbiológico</th></tr></thead>
+      <tbody>
+        <tr><td>2–5%</td><td>Salazón ligera</td><td>Ralentiza bacterias putrefactivas. No elimina patógenos. Conservación de días a semanas.</td></tr>
+        <tr><td>8–12%</td><td>Salazón media</td><td>Inhibe la mayoría de bacterias patógenas. Permite bacterias lácticas beneficiosas. Conservación de semanas a meses.</td></tr>
+        <tr><td>18–25% (saturación)</td><td>Salmuera saturada</td><td>Solo sobreviven bacterias halófilas estrictas. Conservación de meses a años. Riesgo de botulismo si hay zonas anaerobias poco saladas.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="sec-h2" id="s2c">2.3 El papel de los nitratos naturales en el curado</h2>
+  <p>Una de las diferencias fundamentales entre la salazón simple y el curado tradicional es la presencia de nitratos y nitritos naturales. Las sales históricas no eran sal pura: las sales de mina y de evaporación natural contenían impurezas de nitrato potásico (salitre) que actuaban como conservantes adicionales:</p>
+  <ul class="ml">
+    <li><strong>Inhiben específicamente el <em>Clostridium botulinum</em>:</strong> El nitrito es el agente más eficaz conocido contra la bacteria responsable del botulismo en ambientes anaerobios. Los romanos, sin saberlo, utilizaban sal con salitre que cumplía esta función.</li>
+    <li><strong>Fijan el color rojo-rosado de la carne curada:</strong> El nitrito reacciona con la mioglobina de la carne formando nitroso-mioglobina, de color rojo estable. Por eso el jamón curado o el tocino tienen ese color rojizo característico incluso después de meses de secado.</li>
+    <li><strong>Contribuyen al sabor del curado:</strong> Las reacciones del nitrito con proteínas y grasas producen compuestos volátiles que conforman el sabor característico de los embutidos y jamones curados.</li>
+  </ul>
+  <div class="box-warn">IMPORTANTE: La presencia de nitratos naturales en las sales históricas era variable e impredecible. Esto explica en parte por qué algunos curados tradicionales fallaban: si la sal tenía poco salitre, la protección contra el botulismo era insuficiente. Las sales de mar mediterráneo tenían menos nitratos que las sales de mina del centro de Europa, lo que creaba diferencias regionales en la seguridad de los curados.</div>
+</section>
+
+<!-- ══ S3: SAL Y ELEMENTOS ══ -->
+<section class="section" id="s3">
+  <h1 class="sec-h1">3. Tipos de sal, elementos y recipientes</h1>
+
+  <h2 class="sec-h2" id="s3a">3.1 Tipos de sal utilizados históricamente</h2>
+  <ul class="ml">
+    <li><strong>Sal marina (de evaporación solar):</strong> La más usada en el Mediterráneo y las costas atlánticas. Contenía magnesio, calcio y otros minerales que podían afectar al sabor. Las mejores salinas (Cádiz, Trapani, Guérande) producían sal muy apreciada. El bacalao noruego se curaba con sal de Portugal y España porque era de mejor calidad que la sal nórdica.</li>
+    <li><strong>Sal de mina (sal gema o sal de roca):</strong> Extraída de depósitos geológicos en el interior continental. Muy pura en sodio pero con posibles impurezas de nitratos (salitre). Era la sal usada en Europa central para el curado de jamones y embutidos. Las minas de Wieliczka (Polonia) y Hallstatt (Austria) fueron durante siglos las más importantes de Europa.</li>
+    <li><strong>Sal de manantial:</strong> En zonas sin acceso a la costa ni a minas, se evaporaban manantiales salados. Menos pura pero igualmente eficaz. Usada extensamente en el interior de la Galia, Germania e Iberia.</li>
+    <li><strong>Salitre (nitrato potásico, KNO₃):</strong> Se añadía deliberadamente en pequeñas cantidades a las mezclas de curado en muchas tradiciones europeas desde la Edad Media. Se obtenía de las paredes de establos y cuevas. Era conocido como <em>«sal peter»</em> (sal de piedra). Su función conservante era empírica: los curanderos sabían que mejoraba el color y durabilidad de la carne sin entender el mecanismo.</li>
+  </ul>
+
+  <h2 class="sec-h2" id="s3b">3.2 Herramientas y materiales necesarios</h2>
+  <ul class="ml">
+    <li><strong>Piletas, tinas o barreños de piedra o madera:</strong> Para la salazón húmeda (salmuera). Las de piedra eran preferidas por su inercia química. Nunca de metal: el vinagre y la sal atacan el hierro y el cobre generando sabores y toxinas.</li>
+    <li><strong>Barriles de madera de roble:</strong> Para la salazón en salmuera de pescado (bacalao, arenque, anchoas). El roble aporta taninos naturales con propiedades conservantes. El barril debe ser hermético para mantener la salmuera dentro y el aire fuera.</li>
+    <li><strong>Ganchos y clavos de madera o hueso:</strong> Para colgar las piezas durante el curado en seco. El metal se oxida y mancha la carne.</li>
+    <li><strong>Piedras planas y tablas de madera:</strong> Para prensar el alimento durante la salazón inicial, extrayendo agua y asegurando contacto uniforme con la sal.</li>
+    <li><strong>Ánforas y tinajas de barro vidriado:</strong> Para almacenar aceitunas, sardinas y otros alimentos en salmuera. La cerámica vidriada es inerte al ácido y a la sal.</li>
+    <li><strong>Telas de lino y muselina:</strong> Para envolver piezas en curado y protegerlas del polvo e insectos durante el proceso en secadero.</li>
+    <li><strong>Pesas y contrapesos:</strong> Para mantener el alimento completamente sumergido en la salmuera. Cualquier parte expuesta al aire puede desarrollar botulismo o moho.</li>
+  </ul>
+
+  <h2 class="sec-h2" id="s3c">3.3 Recintos y condiciones para el curado</h2>
+  <ul class="ml">
+    <li><strong>Secaderos o saladeros:</strong> Recintos con ventilación cruzada controlada, frescos (8–15 °C) y de humedad relativa media (65–80%). En España, los secaderos de jamón se orientaban al norte para recibir viento frío y seco. En Parma, el aire cálido y seco que baja de los Apeninos es parte esencial del proceso del <em>prosciutto</em>.</li>
+    <li><strong>Bodegas de piedra subterráneas:</strong> Temperatura constante todo el año (10–14 °C), oscuridad y humedad moderada. Ideales para el curado lento de jamones, quesos y cecinas.</li>
+    <li><strong>Cuevas naturales:</strong> Usadas en regiones montañosas para el curado de quesos (Cabrales, Roquefort) y embutidos. La flora de hongos y bacterias propia de cada cueva forma parte del ecosistema de maduración.</li>
+  </ul>
+  <div class="box-info">El clima como ingrediente: En el curado tradicional de alta calidad, el clima local es considerado un ingrediente más. La denominación de origen del jamón de Guijuelo, el <em>prosciutto di Parma</em> o el bacalao de las Islas Feroe está directamente vinculada a las condiciones climáticas específicas de cada lugar. La temperatura, la humedad y los microorganismos del aire son factores microbiológicos reales que afectan al resultado.</div>
+</section>
+
+<!-- ══ S4: ALIMENTOS ══ -->
+<section class="section" id="s4">
+  <h1 class="sec-h1">4. Alimentos tratados con salazón y curado: procesos paso a paso</h1>
+  <p>A continuación se describe el proceso histórico detallado para cada tipo de alimento, tal y como se realizaba antes del siglo XIX.</p>
+</section>
+
+<!-- 4.1 JAMÓN -->
+<section class="section" id="s4a">
+  <div class="food-hdr"><span class="food-icon">🍖</span><h2 class="sec-h2" style="margin-top:0">4.1 Jamón y pierna curada (cerdo, venado, jabalí)</h2></div>
+  <span class="dur">Duración: 1 – 3 años</span>
+  <p>El jamón curado es el producto más emblemático de la tradición conservera europea. Catón el Censor describía el proceso de curado del jamón en el siglo II a. C., y la técnica ha cambiado sorprendentemente poco en esencia durante dos mil años. La diferencia entre un jamón simplemente salado y uno verdaderamente curado reside en el tiempo, la temperatura y la gestión de la humedad.</p>
+  <h3 class="sec-h3">Proceso histórico paso a paso</h3>
+  <ol class="ml">
+    <li><strong>Selección de la pieza:</strong> Elegir piernas traseras de cerdo ibérico, landrace o cerdo negro de raza rústica. El peso ideal históricamente era entre 8 y 12 kg con la piel intacta. Descartar piezas con heridas, hematomas profundos o zonas con olor.</li>
+    <li><strong>Sangrado y limpieza:</strong> Masajear la pieza desde el jarrete hacia la caña para expulsar la sangre residual de los vasos. La sangre es el principal sustrato para <em>Clostridium botulinum</em>. No lavar con agua: la humedad superficial retarda el inicio de la salazón.</li>
+    <li><strong>Salazón seca (primera fase):</strong> Enterrar completamente la pieza en sal gruesa marina en una pileta de piedra o madera. La proporción histórica era aproximadamente 1 día de sal por cada kilogramo de peso (una pieza de 10 kg: 10 días). La sal debe cubrir todos los ángulos, especialmente la zona del hueso del fémur, donde el botulismo tiene mayor riesgo.</li>
+    <li><strong>Volteo a mitad del periodo de sal:</strong> A la mitad del tiempo de salazón, retirar la pieza, masajear con sal fresca y reenterrar en posición invertida para garantizar penetración uniforme.</li>
+    <li><strong>Lavado y cepillado:</strong> Al finalizar la salazón, retirar el exceso de sal con agua fría y cepillar suavemente. Secar completamente con tela de lino. A partir de este momento la pieza no debe volver a mojarse.</li>
+    <li><strong>Asentamiento o post-salado:</strong> Colgar la pieza en un recinto fresco (3–6 °C) y húmedo (85–90% de humedad relativa) durante 45 a 90 días. Durante esta fase la sal penetra desde la superficie hacia el interior y la pieza pierde entre el 15 y el 25% de su peso inicial.</li>
+    <li><strong>Secado y maduración en secadero:</strong> Trasladar a un secadero con ventilación cruzada a temperatura progresivamente creciente (de 6 °C en invierno a 15–20 °C en verano). Este ciclo natural activa enzimas de la carne que desarrollan el sabor. Durante esta fase aparecen mohos superficiales blancos o grises (<em>Penicillium</em>) que forman la «flora de secadero»: son beneficiosos y protegen la corteza.</li>
+    <li><strong>Untado de manteca:</strong> Hacia el 6.º-8.º mes, untar la zona muscular expuesta con una mezcla de manteca de cerdo, pimentón y sal. Esta capa ralentiza el secado excesivo en las zonas más expuestas, permitiendo que el interior siga madurando.</li>
+    <li><strong>Control con cala:</strong> Los maestros jamoneros usaban una aguja de hueso de vaca o de caña para insertar en puntos clave de la pieza y olerla. El olor debe ser a curado limpio y aromático, nunca a putrefacción o amoníaco.</li>
+    <li><strong>Almacenamiento final:</strong> Colgar en bodega oscura, fresca y ventilada. Una pieza bien curada puede conservarse colgada entre 1 y 3 años adicionales. No envolver herméticamente: el jamón sigue «respirando» y madurando en el hueso.</li>
+  </ol>
+  <div class="box-warn">RIESGO CRÍTICO: El botulismo en jamones es la principal causa histórica de muerte por alimento en Europa. El <em>Clostridium botulinum</em> se desarrolla en el interior del hueso del fémur si la sal no ha penetrado suficientemente. Si al abrir la pieza el hueso huele mal, la carne próxima tiene color grisáceo, o la pieza no ha perdido suficiente peso: no consumir.</div>
+</section>
+
+<!-- 4.2 TOCINO -->
+<section class="section" id="s4b">
+  <div class="food-hdr"><span class="food-icon">🥓</span><h2 class="sec-h2" style="margin-top:0">4.2 Tocino, panceta y papada de cerdo</h2></div>
+  <span class="dur">Duración: 6 – 18 meses</span>
+  <p>El tocino y la panceta son piezas de cerdo con alta proporción de grasa. La grasa actúa como barrera natural al agua y a los microorganismos, lo que hace que estas piezas sean más fáciles de curar que las piezas magras. Han sido el alimento calórico de invierno por excelencia en toda Europa desde la Edad Media.</p>
+  <h3 class="sec-h3">Proceso histórico paso a paso</h3>
+  <ol class="ml">
+    <li><strong>Preparación:</strong> Retirar el exceso de grasa superficial dejando una capa de al menos 2 cm. Cortar en piezas rectangulares manejables de 2–4 kg. La piel debe quedar intacta en un lado.</li>
+    <li><strong>Mezcla de curado:</strong> Preparar una mezcla de sal gruesa, pimienta negra molida, laurel machacado, ajo seco y, en las tradiciones centroeuropeas, salitre en proporción mínima (1 cucharadita por kilo de sal). Frotar generosamente por todas las caras excepto la piel.</li>
+    <li><strong>Salazón en pila:</strong> Apilar las piezas en tina de madera o piedra, con la piel hacia abajo en la capa inferior. Cubrir con la mezcla de curado restante. Dejar en lugar fresco (4–8 °C) durante 3 a 5 semanas, volteando las piezas cada semana.</li>
+    <li><strong>Lavado y secado:</strong> Retirar, lavar con agua fría para quitar exceso de sal superficial y secar con tela. Dejar orear colgado en un lugar ventilado durante 2–3 días.</li>
+    <li><strong>Ahumado opcional:</strong> En las tradiciones del norte de España, Francia, Alemania y Europa del este, el tocino se ahumaba en frío (15–25 °C) durante 2 a 5 días con leña de encina, haya o manzano. (Este proceso se detallará en el Volumen III.)</li>
+    <li><strong>Curado y maduración:</strong> Colgar en secadero o bodega fresca durante 3 a 12 meses. La panceta está lista cuando al cortarla transversalmente presenta un color rosado uniforme y firme, sin zonas grisáceas o blandas.</li>
+  </ol>
+  <div class="box-warn">RIESGO: La grasa del tocino puede enranciarse (oxidación de ácidos grasos insaturados) produciendo sabores desagradables. El pimentón y el ajo de la mezcla de curado actúan como antioxidantes naturales. Si el tocino tiene zonas amarillas o con sabor amargo al probar una esquina, la grasa está rancia.</div>
+</section>
+
+<!-- 4.3 BACALAO -->
+<section class="section" id="s4c">
+  <div class="food-hdr"><span class="food-icon">🐟</span><h2 class="sec-h2" style="margin-top:0">4.3 Bacalao en salazón</h2></div>
+  <span class="dur">Duración: 6 – 18 meses</span>
+  <p>El bacalao en salazón fue el alimento que hizo posible la colonización del Atlántico Norte y que alimentó a Europa durante siglos. Los vascos, portugueses, noruegos e islandeses desarrollaron en paralelo técnicas casi idénticas que convirtieron el bacalao atlántico en el primer alimento industrial de la historia. A finales del siglo XV, la industria del bacalao salado ya era de escala intercontinental.</p>
+  <div class="box-info">Dato histórico: El bacalao en salazón fue durante los siglos XVI al XVIII el alimento más consumido de Europa, especialmente en los días de ayuno impuestos por la Iglesia. En la España del siglo XVII, el «abadejo» (bacalao) era más barato que la carne fresca. La expresión «comer abadejo» era sinónimo de pobreza.</div>
+  <h3 class="sec-h3">Proceso histórico paso a paso</h3>
+  <ol class="ml">
+    <li><strong>Captura y eviscerado inmediato:</strong> Fundamental. El bacalao debe eviscerase en cubierta, antes de 2 horas tras la captura. Las vísceras contienen enzimas y bacterias que se extienden rápidamente por la carne.</li>
+    <li><strong>Abertura en mariposa:</strong> Cortar el bacalao a lo largo de la espina dorsal, sin separar las dos mitades. Abrir como un libro. Este corte aumenta al doble la superficie de contacto con la sal.</li>
+    <li><strong>Primera salazón a bordo:</strong> En los barcos bacaladeros, se salaba directamente en las bodegas del barco en capas alternas de pescado y sal gruesa (proporción 1:3). Las campañas duraban meses, y el bacalao se curaba durante el viaje de regreso.</li>
+    <li><strong>Prensado:</strong> Colocar tablas de madera y pesas sobre las capas de bacalao salado para extraer agua y mantener el pescado compacto. El líquido que sale («pickle») se recogía para rociar las capas superiores.</li>
+    <li><strong>Segundo curado en tierra:</strong> Al llegar a puerto, el bacalao se sacaba del barco, se enjuagaba brevemente, se prensaba de nuevo y se apilaba en almacenes en tierra para continuar el curado semanas o meses adicionales.</li>
+    <li><strong>Secado complementario:</strong> En la tradición noruega e islandesa, el bacalao en sal se sacaba a bastidores de madera al aire libre para un secado final. En la tradición portuguesa y española, se dejaba en sal sin secar, produciendo el «bacalhau» húmedo.</li>
+    <li><strong>Almacenamiento:</strong> En barriles de madera de roble sellados con sal adicional entre capas, en almacenes frescos y ventilados.</li>
+  </ol>
+  <div class="box-warn">RIESGO PRINCIPAL: Histamina. Si el bacalao no se eviscera y sala en las primeras horas tras la captura, ciertas bacterias producen histamina en la carne. La histamina causa el síndrome escombrotóxico (rubor, urticaria, náuseas, taquicardia) y es termoestable: ni el curado ni la cocción la eliminan. La única prevención es la rapidez en el procesado post-captura.</div>
+</section>
+
+<!-- 4.4 ANCHOAS -->
+<section class="section" id="s4d">
+  <div class="food-hdr"><span class="food-icon">🫙</span><h2 class="sec-h2" style="margin-top:0">4.4 Anchoas y boquerones en salazón</h2></div>
+  <span class="dur">Duración: 12 – 24 meses</span>
+  <p>La anchoa en salazón es uno de los productos curados más complejos y transformados de la tradición mediterránea. A diferencia del bacalao, la anchoa sufre una profunda transformación bioquímica: el proceso de maduración en sal durante meses activa enzimas proteolíticas propias del pescado que descomponen parcialmente las proteínas musculares, creando una textura suave, <em>umami</em> y un sabor completamente diferente al boquerón fresco. Este proceso es el mismo principio que producía el famoso <strong>garum romano</strong>, la salsa de pescado fermentado que era el condimento omnipresente de la cocina latina.</p>
+  <h3 class="sec-h3">Proceso histórico paso a paso</h3>
+  <ol class="ml">
+    <li><strong>Captura en temporada:</strong> Las anchoas se capturan en primavera y principios de verano (abril–junio en el Cantábrico), cuando tienen mayor contenido en grasa. Las anchoas magras no maduran correctamente y quedan con textura harinosa.</li>
+    <li><strong>Descabezado y eviscerado:</strong> Retirar la cabeza con un movimiento de torsión (sin cuchillo, con los dedos) extrayendo a la vez las vísceras. En tradiciones artesanales se hacía en las primeras horas tras la captura.</li>
+    <li><strong>Primera salazón:</strong> Colocar en barril de madera o tinaja de barro en capas alternando anchoas (en disposición circular, con el vientre hacia arriba) y sal gruesa. Proporción: 1 parte de sal por 2 de anchoas.</li>
+    <li><strong>Prensado con piedra:</strong> Colocar una piedra plana o tabla de madera con pesas sobre la última capa. La presión expulsa el líquido y compacta el conjunto. No retirar las pesas en ningún momento del curado.</li>
+    <li><strong>Maduración en sal:</strong> Dejar en lugar fresco y oscuro (10–15 °C) durante un mínimo de 6 meses y preferiblemente 12 meses. Las enzimas proteolíticas del propio músculo trabajan lentamente, transformando proteínas en péptidos y aminoácidos libres que dan el sabor umami característico.</li>
+    <li><strong>Control de la salmuera:</strong> Si la salmuera disminuye, añadir salmuera saturada (30 g de sal por 100 ml de agua) para mantener las anchoas completamente sumergidas. El contacto con el aire produce botulismo en ambiente anaerobio parcial.</li>
+    <li><strong>Fileteado y envasado en aceite:</strong> Al terminar la maduración, enjuagar el exceso de sal, separar los dos filetes a mano, retirar la espina central y colocar en aceite de oliva. En la tradición histórica, las anchoas se guardaban completamente en sal y se fileteaban en el momento del consumo.</li>
+  </ol>
+  <div class="box-warn">RIESGO: La anchoa en salazón es uno de los alimentos con mayor riesgo de botulismo si no se mantiene completamente cubierta de sal o salmuera. El <em>Clostridium botulinum</em> es anaerobio estricto. La pesa sobre la última capa no es decorativa: es una medida de seguridad.</div>
+</section>
+
+<!-- 4.5 ACEITUNAS -->
+<section class="section" id="s4e">
+  <div class="food-hdr"><span class="food-icon">🫒</span><h2 class="sec-h2" style="margin-top:0">4.5 Aceitunas en salmuera</h2></div>
+  <span class="dur">Duración: 6 – 18 meses</span>
+  <p>La aceituna es el único fruto que necesita tratamiento previo a la salazón: en estado natural contiene <strong>oleuropeína</strong>, un glucósido amargo extremadamente intenso que la hace prácticamente incomible. La salmuera y la fermentación eliminan progresivamente este amargor, transformando la aceituna en el producto que conocemos.</p>
+  <h3 class="sec-h3">Proceso histórico paso a paso</h3>
+  <ol class="ml">
+    <li><strong>Recolección:</strong> Recoger aceitunas en el punto de madurez deseado: verdes (no maduras, más firmes y amargas), en envero (moradas, semicuradas) o negras (maduras, más blandas y suaves). Evitar aceitunas caídas al suelo o con daños.</li>
+    <li><strong>Desamargado:</strong> El proceso más antiguo (romano) consistía en sumergir las aceitunas en agua fría cambiándola a diario durante 7 a 20 días hasta reducir el amargor a nivel tolerable. En algunas tradiciones se realizaba una incisión longitudinal en cada aceituna para acelerar la lixiviación.</li>
+    <li><strong>Preparación de la salmuera:</strong> Disolver sal en agua en proporción del 8 al 12% (80–120 g de sal por litro de agua). Añadir hierbas aromáticas según la tradición regional: hinojo, tomillo, laurel, ajo, romero, ralladura de limón o naranja.</li>
+    <li><strong>Envasado:</strong> Colocar las aceitunas en tinaja de barro vidriado, barril de madera o recipiente de cerámica. Verter la salmuera fría hasta cubrir completamente. Colocar un peso para mantener las aceitunas sumergidas: las que flotan se oxidan y desarrollan moho.</li>
+    <li><strong>Fermentación y maduración:</strong> Dejar en lugar fresco y sombreado durante 2 a 6 meses. Las bacterias lácticas presentes naturalmente en la piel de la aceituna fermentan los azúcares residuales, produciendo ácido láctico que baja el pH y contribuye a la conservación.</li>
+    <li><strong>Control del proceso:</strong> Revisar semanalmente. Si aparece una película blanca en la superficie (levadura Kahm), retirarla y añadir sal. Si aparece moho verde o negro con mal olor, desechar el lote.</li>
+  </ol>
+  <div class="box-info">El pH como medida de seguridad: Las aceitunas en salmuera son seguras frente al botulismo cuando el pH baja por debajo de 4,6 gracias a la fermentación láctica. La sal sola (sin fermentación) no es suficiente garantía de seguridad en aceitunas: se necesita la acidificación por fermentación.</div>
+</section>
+
+<!-- 4.6 CECINA -->
+<section class="section" id="s4f">
+  <div class="food-hdr"><span class="food-icon">🥩</span><h2 class="sec-h2" style="margin-top:0">4.6 Cecina (vacuno, équido o venado)</h2></div>
+  <span class="dur">Duración: 3 – 12 meses</span>
+  <p>La cecina es la versión bovina y de équido (caballo, mulo, burro) del jamón curado. Es un producto especialmente importante en la España interior, documentada en la Península Ibérica desde el siglo XII. La cecina de León es la versión más documentada históricamente, aunque existían variantes en Galicia, Castilla y el norte de Portugal.</p>
+  <h3 class="sec-h3">Proceso histórico paso a paso</h3>
+  <ol class="ml">
+    <li><strong>Selección de la pieza:</strong> Las piezas más adecuadas son las magras del cuarto trasero: tapa, babilla, contra, espaldilla y llana. Deben tener un grosor mínimo de 5 cm.</li>
+    <li><strong>Salazón seca:</strong> Frotar abundantemente con sal gruesa, pimienta negra y ajo machacado. Apilar en pileta fría (2–5 °C). Tiempo: 1 día por cm de grosor de la pieza.</li>
+    <li><strong>Lavado y oreo:</strong> Retirar, lavar con agua fría y colgar al aire durante 2–3 días en lugar ventilado y fresco para que la superficie se seque y forme una costra exterior («pelleja»).</li>
+    <li><strong>Ahumado suave (opcional pero tradicional):</strong> En la tradición leonesa y gallega, la cecina se ahumaba con leña de encina o roble durante 12 a 15 días con fuego muy suave. (Ver Volumen III.)</li>
+    <li><strong>Maduración en secadero:</strong> Colgar en secadero ventilado durante 7 a 12 meses. La cecina está lista cuando ha perdido el 30–40% de su peso inicial y su textura al corte es firme, de color rojo vivo en el interior y marrón oscuro en el exterior.</li>
+  </ol>
+</section>
+
+<!-- 4.7 BOG BUTTER -->
+<section class="section" id="s4g">
+  <div class="food-hdr"><span class="food-icon">🧈</span><h2 class="sec-h2" style="margin-top:0">4.7 Mantequilla salada en turbera (<em>Bog Butter</em>)</h2></div>
+  <span class="dur">Duración: 1–2 años (en condiciones de turbera: potencialmente décadas)</span>
+  <p>El <em>bog butter</em> o mantequilla de turbera es uno de los métodos de conservación más singulares de la historia. Se han encontrado depósitos de mantequilla conservada en turberas de Irlanda, Escocia y Escandinavia con edades de hasta <strong>3.000 años</strong>, en algunos casos todavía analizables. La turbera actúa como un refrigerador natural: su temperatura es constante y baja (4–8 °C todo el año), su entorno ácido (pH 4–5) inhibe el crecimiento bacteriano, y su ausencia de oxígeno previene la oxidación de la grasa.</p>
+  <h3 class="sec-h3">Proceso histórico paso a paso</h3>
+  <ol class="ml">
+    <li><strong>Elaboración de la mantequilla:</strong> Batir la nata o crema de leche en odre de cuero o recipiente de madera hasta separar la grasa del suero. Escurrir el suero completamente: el suero residual acelera el deterioro.</li>
+    <li><strong>Salado:</strong> Mezclar la mantequilla con sal gruesa en proporción del 3–5% del peso. Amasar bien para distribuir uniformemente.</li>
+    <li><strong>Envasado:</strong> Introducir en recipiente de madera (barriles pequeños), bolsas de corteza de abedul o envuelto en hojas de helecho. En la tradición irlandesa se usaban moldes de madera de fresno.</li>
+    <li><strong>Enterrado en la turbera:</strong> Enterrar el recipiente en la parte más profunda de la turbera, a al menos 50 cm de profundidad. La turbera debe ser activa (húmeda y con vegetación), no una turbera seca. Marcar el lugar.</li>
+    <li><strong>Recuperación:</strong> En la tradición histórica, se enterraba en otoño y se recuperaba en invierno o primavera. Si la turbera es suficientemente ácida y fría, la mantequilla puede durar años sin deteriorarse significativamente.</li>
+  </ol>
+  <div class="box-info">Nota arqueológica: Los análisis químicos de mantequillas de turbera con miles de años de antigüedad muestran que el proceso de enranciamiento se detuvo prácticamente al poco de ser enterradas. Algunas excavaciones en Irlanda han descubierto depósitos de <em>bog butter</em> que los arqueólogos describen como «todavía con aspecto comestible», aunque naturalmente no se recomienda consumirlos.</div>
+</section>
+
+<!-- ══ S5: TABLA ══ -->
+<section class="section" id="s5">
+  <h1 class="sec-h1">5. Tabla comparativa de métodos</h1>
+  <div class="tbl-wrap">
+    <table class="mt">
+      <thead><tr>
+        <th>Alimento / Técnica</th>
+        <th>Duración aprox.</th>
+        <th>Método principal</th>
+        <th>Riesgos principales</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Jamón ibérico curado</td><td>1–3 años</td><td>Salazón seca + secadero</td><td>Botulismo si sazonado insuficiente; mohos en corteza</td></tr>
+        <tr><td>Tocino y panceta</td><td>6–18 meses</td><td>Salazón seca + ahumado suave</td><td>Rancidez de la grasa; Salmonela si mal curado</td></tr>
+        <tr><td>Bacalao en sal</td><td>6–18 meses</td><td>Salazón en capas (1:3)</td><td>Histamina si no se sala rápido tras captura</td></tr>
+        <tr><td>Anchoa en salazón</td><td>12–24 meses</td><td>Salazón en barril + prensado</td><td>Botulismo en ambiente anaerobio sin sal suficiente</td></tr>
+        <tr><td>Sardinas en sal</td><td>6–12 meses</td><td>Salazón seca en capas</td><td>Histamina; moho si la capa de sal es insuficiente</td></tr>
+        <tr><td>Arenque en salmuera</td><td>1–3 meses</td><td>Salmuera saturada en barril</td><td>Botulismo; sabor muy intenso si se excede el tiempo</td></tr>
+        <tr><td>Aceitunas en salmuera</td><td>6–18 meses</td><td>Salmuera con hierbas</td><td>Botulismo si pH no baja de 4,6</td></tr>
+        <tr><td>Queso curado con sal</td><td>Meses–2 años</td><td>Salazón de corteza + bodega</td><td>Moho patógeno en corteza; Listeria en queso blando</td></tr>
+        <tr><td>Mantequilla salada (bog butter)</td><td>1–2 años (turbera: décadas)</td><td>Enterrado en turba con sal</td><td>Rancidez; contaminación si la turba no es ácida</td></tr>
+        <tr><td>Cecina</td><td>3–12 meses</td><td>Salmuera + secado al aire</td><td>Botulismo; Salmonela si temperatura &gt;15 °C</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:0.84rem;color:#5a80a0;margin-top:0.7rem;font-style:italic;">(*) Las duraciones son orientativas. Dependen de la temperatura de almacenamiento, la concentración de sal empleada y las condiciones del recinto de curado.</p>
+</section>
+
+<!-- ══ S6: SALMUERAS ══ -->
+<section class="section" id="s6">
+  <h1 class="sec-h1">6. Preparación de salmueras: proporciones y procedimientos históricos</h1>
+
+  <h2 class="sec-h2">6.1 La prueba histórica del huevo</h2>
+  <p>Antes de los instrumentos de medición modernos, los maestros conserveros medían la concentración de la salmuera con una prueba sencilla descrita en tratados de conservación desde la Antigüedad:</p>
+  <ul class="ml">
+    <li><strong>Método del huevo:</strong> Introducir un huevo fresco (con cáscara) en la salmuera. Si el huevo se hunde completamente: concentración inferior al 10% (demasiado baja). Si el huevo flota con aproximadamente 2 cm de casquete visible: concentración del 20–25% (salmuera de saturación, óptima para pescado y carne). Si el huevo flota con más de la mitad fuera: concentración excesiva.</li>
+    <li><strong>Método de la patata cruda:</strong> Una patata pelada de tamaño mediano debe flotar con aproximadamente 1–2 cm por encima de la superficie cuando la salmuera tiene una concentración del 15–18%, adecuada para curado de carnes medianas.</li>
+  </ul>
+
+  <h2 class="sec-h2">6.2 Proporciones de referencia históricas</h2>
+  <div class="tbl-wrap">
+    <table class="conc-table">
+      <thead><tr><th>Uso</th><th>Sal por litro de agua</th><th>Observaciones</th></tr></thead>
+      <tbody>
+        <tr><td>Aceitunas (fermentación)</td><td>80–120 g</td><td>Permite fermentación láctica. Riesgo botulismo si pH no baja de 4,6.</td></tr>
+        <tr><td>Verduras encurtidas</td><td>100–150 g</td><td>Favorece bacterias lácticas sobre patógenas. Conservación hasta 1 año.</td></tr>
+        <tr><td>Carne en salmuera (cecina corta)</td><td>150–200 g</td><td>Conservación de semanas. Debe complementarse con secado posterior.</td></tr>
+        <tr><td>Pescado (salazón prolongada)</td><td>250–360 g (saturación)</td><td>Salmuera saturada. Conservación de meses a más de 1 año.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══ S7: SEGURIDAD ══ -->
+<section class="section" id="s7">
+  <h1 class="sec-h1">7. Normas de seguridad alimentaria específicas del curado</h1>
+  <p>El curado y la salazón tienen un perfil de riesgo diferente al del secado. El principal peligro no es el moho sino el <strong>botulismo</strong>, precisamente porque las condiciones anaerobias que crea la sal dentro de piezas grandes son el entorno ideal para el <em>Clostridium botulinum</em> si la concentración de sal es insuficiente.</p>
+
+  <h2 class="sec-h2">7.1 El botulismo en la salazón: lo que hay que saber</h2>
+  <ul class="ml">
+    <li><strong><em>Clostridium botulinum</em> es anaerobio estricto:</strong> Necesita ausencia de oxígeno para multiplicarse y producir toxina. Por eso el interior de un jamón, el fondo de un barril de anchoas o el centro de una pieza de cecina son los puntos críticos.</li>
+    <li><strong>La toxina botulínica es la más letal conocida:</strong> Dosis letales en microgramos. El alimento contaminado puede parecer, oler y saber completamente normal. No hay señal organoléptica de alerta.</li>
+    <li><strong>El calor destruye la toxina, no las esporas:</strong> Hervir el alimento sospechoso durante 10 minutos a 100 °C destruye la toxina. Pero las esporas de C. botulinum son termorresistentes y pueden reactivarse. En el jamón, las anchoas o la cecina, el calor no es una opción preventiva.</li>
+    <li><strong>La sal a concentración suficiente inhibe C. botulinum:</strong> Por encima del 10% de sal en el interior de la pieza el riesgo es bajo. El problema es que la sal tarda tiempo en penetrar: en un jamón de 10 kg puede tardar semanas. Durante ese tiempo el interior es vulnerable.</li>
+  </ul>
+
+  <h2 class="sec-h2">7.2 Reglas de seguridad irrenunciables</h2>
+  <ul class="ml">
+    <li>Nunca reducir el tiempo de salazón: las proporciones históricas (1 día por kilo para jamón; 1:3 sal:pescado para bacalao) son mínimos de seguridad, no convenciones estéticas.</li>
+    <li>Mantener el alimento en salmuera completamente cubierto: cualquier zona expuesta al aire en contacto con zonas anaerobias es un punto de riesgo.</li>
+    <li>La temperatura durante el curado debe ser inferior a 8 °C en la fase de salazón. Por encima de 15 °C, el C. botulinum puede crecer más rápido de lo que la sal penetra.</li>
+    <li>No reutilizar la salmuera usada en una tanda anterior: puede contener esporas que contaminen la nueva tanda.</li>
+    <li>Al abrir una pieza curada, inspeccionar el hueso o la zona central: color grisáceo, textura gelatinosa u olor a amoníaco son señales de deterioro. Desechar sin probar.</li>
+    <li>Los recipientes deben estar completamente limpios y sin residuos de curaciones anteriores antes de cada uso.</li>
+  </ul>
+  <div class="box-warn">REGLA ABSOLUTA: Si un alimento curado huele mal al abrirlo, desechar la pieza completa. No probar para ver «si sabe mal». La toxina botulínica puede estar presente sin olor ni sabor detectable, pero en piezas que huelen a putrefacción el riesgo es extremo. En caso de duda, la regla histórica era: «más vale perder la pieza que la vida».</div>
+</section>
+
+<!-- ══ S8: CONCLUSIÓN ══ -->
+<section class="section" id="s8">
+  <h1 class="sec-h1">8. Conclusión</h1>
+  <p>La salazón y el curado son las técnicas de conservación que más profundamente han transformado los alimentos: no solo los preservan, sino que crean productos nuevos con sabores, texturas y complejidades organolépticas que no existen en el alimento original. El jamón ibérico, la anchoa en salazón o el bacalao curado son tan distintos del cerdo, el boquerón o el bacalao frescos que constituyen alimentos diferentes en todo salvo en el origen.</p>
+  <p>Su mayor desafío es el botulismo. De todas las técnicas de conservación tradicional, el curado es el que exige mayor rigor en las proporciones y los tiempos: un secado incompleto produce un alimento de peor calidad; un curado insuficiente puede producir un alimento mortal. Esta es la razón por la que el conocimiento del curado se transmitía de maestro a aprendiz con extremo cuidado.</p>
+  <p>El siguiente volumen de este manual describirá la técnica del ahumado: sus principios antisépticos, los tipos de leña y sus efectos, y los procesos de ahumado frío y caliente aplicados a carnes, pescados y quesos.</p>
+  <div class="box-info">Siguiente volumen: Técnica del AHUMADO — principios antisépticos del humo, tipos de leña, ahumado frío y caliente, alimentos tratados y duraciones.</div>
+  <p style="text-align:center;font-family:'Cinzel',serif;font-size:0.7rem;color:#5a80a0;letter-spacing:0.15em;margin-top:2rem;">FIN DEL VOLUMEN II — TÉCNICA DE LA SALAZÓN Y EL CURADO</p>
+</section>
+
+</div><!-- end page-wrap -->
+
+<script>
+  // Fade-in on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.section').forEach(s => observer.observe(s));
+
+  // Active nav highlight
+  const allSections = document.querySelectorAll('[id]');
+  const navLinks   = document.querySelectorAll('.nav-toc a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    allSections.forEach(s => { if (window.scrollY >= s.offsetTop - 130) cur = s.id; });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+    });
+  }, { passive: true });
+</script>
+</body>
+</html>
